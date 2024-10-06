@@ -1,5 +1,31 @@
 # Computer-Vision
 
+## Part 2: Data Collection and Preparation
+
+### 1. Source of Data
+- **Collected Data**: The dataset consists of images of playing cards, captured manually using a phone camera. The images were taken under controlled indoor lighting conditions to ensure consistency across the dataset. Each card was photographed five times, resulting in a diverse dataset suitable for training, validation, and testing. I collected data using the camera.py script allowing me to take photos automatically speeding up the process and allowing 
+  
+  - The images are named in the format `XX-01.png`, where `XX` represents the card identifier (e.g., `KS` for King of Spades) and the number represents the sample.
+  
+### 2. Differences Between Training and Validation Subsets
+- **Training Set**: 60% (3) of the images were randomly selected for training. This set was collected with a fixed background, consistent lighting, and slight variations in positioning.
+  
+- **Validation Set**: 20% (1) of the images were used for validation. The validation images include minor variations in card angles, and slight changes in lighting or background, which helps evaluate the model's generalization.
+  
+- **Test Set (Unknown)**: 20% (1) of the images were set aside for final testing. These images will remain untouched until the final evaluation to avoid bias.
+
+### 3. Number of Distinct Objects/Subjects
+- The dataset contains **52 distinct card types** (e.g., King of Spades, Ace of Hearts, etc.). +2 different sets of Jokers and images of the back of the cards. Each card has **5 samples**, leading to a total of 275 images.
+
+### 4. Characterization of Samples
+- **Resolution**: The images are captured at a resolution of 1080x1920 pixels.
+  
+- **Sensors Used**: The images were captured using a smartphone camera (iPhone) with an automatic focus sensor.
+  
+- **Lighting and Ambient Conditions**: The dataset was collected under controlled indoor lighting, ensuring uniform exposure across the images. Variations
+
+
+
 # Poker Hand Identification Using Computer Vision
 ## Problem Overview
 The goal of this project is to use computer vision to identify poker hands from images. This would involve detecting playing cards, then recognizing suits, ranks and value within the game and evaluating the hand based on the card combinations. Some challenges would include lighting, card orientation and different card designs. 
