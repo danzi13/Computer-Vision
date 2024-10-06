@@ -7,7 +7,7 @@
   
   - The images are named in the format `XX-01.png`, where `XX` represents the card identifier (e.g., `KS` for King of Spades) and the number represents the sample.
   
-### 2. Differences Between Training and Validation Subsets
+### 2. Differences Between Training and Validation Subsets, these sets can be found in photos within each respective folder.
 - **Training Set**: 60% (3) of the images were randomly selected for training. This set was collected with a fixed background, consistent lighting, and slight variations in positioning.
   
 - **Validation Set**: 20% (1) of the images were used for validation. The validation images include minor variations in card angles, and slight changes in lighting or background, which helps evaluate the model's generalization.
