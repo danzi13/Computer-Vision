@@ -14,8 +14,10 @@
   
 - **Test Set (Unknown)**: 20% (1) of the images were set aside for final testing. These images will remain untouched until the final evaluation to avoid bias.
 
+- These were chosen randomly in each resepctive folder using a script (card-dist.py) to speed up the process.
+
 ### 3. Number of Distinct Objects/Subjects
-- The dataset contains **52 distinct card types** (e.g., King of Spades, Ace of Hearts, etc.). +2 different sets of Jokers and images of the back of the cards. Each card has **5 samples**, leading to a total of 275 images.
+- The dataset contains **52 distinct card types** (e.g., King of Spades, Ace of Hearts, etc.). +2 different sets of Jokers and 5 of the back of the cards. Each card has **5 samples**, leading to a total of 275 images.
 
 ### 4. Characterization of Samples
 - **Resolution**: The images are captured at a resolution of 1080x1920 pixels.
@@ -24,6 +26,7 @@
   
 - **Lighting and Ambient Conditions**: The dataset was collected under controlled indoor lighting, ensuring uniform exposure across the images. Variations
 
+-End of Part2
 
 
 # Poker Hand Identification Using Computer Vision
