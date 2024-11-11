@@ -18,12 +18,25 @@ This is the original image:
 **Crop_Card(image_path):**
 This function loads the image in grayscale which simplifies the edge detection on the table for our card. We then apply Gaussian blur to reduce noise ensuring edge detection isn’t influenced by small details. We then used Sobel for actual edge detection which was useful for identifying straight edges crucial for our horizontal and vertical gradients. After edge detection the image is thresholded to create a binary image (edges = white, non-edges = black). This step simplifies the edges, making it easier to detect contours and, ultimately, the card itself. We then findContours to identify the largest one (which will be the card), we use this largest contour to isolate the card itself from the image to crop and only focus on feature extraction from this card.Blurring is essential to smooth out noise, which could lead to false edges or small irrelevant contours. It ensures that the edge detection only highlights the meaningful boundaries. Tried to replicate what I learned from the cereal Sobel Operator: Sobel was a standard edge detection operator that computes intensity gradients, making it a suitable method for detecting the sharp, well-defined edges of a card. Sobel’s simple approach is ideal for detecting straight edges in relatively clean images. Thresholding: This is just the binary format we used in class so I continued from this baseline Contour Detection: Again is just the contour format we used in class so I continued from this baseline Bounding Box and Cropping: These are also basic methods learned from class just used cv_image show to display image, not even really sure if cropping can be more “efficient” 
 **This is the cropped image:**
-![Card Original](readme_images/cropped_card.png)
+![Card Crop](readme_images/cropped_card.png)
 
 
 **Bounding(cropped_image, contour):**
 This function is basically to clean up the card itself. We detect boxes, remove noise (of small irrelevant detections), merge boxes that are close together and display results. Parameters are a cropped_image and it returns a list of bounding boxes. We do the following steps to achieve this: grayscale conversion, image into grayscale -> convert image to binary based on intensity values, region labeling connection regions in the binary image, bounding box extraction with filtering of ones that are too small, then merge bounding boxes. The function isolates features by thresholding, labeling regions, and extracting bounding boxes. Nearby bounding boxes are merged to prevent misclassification of adjacent features. Not going to repeat with justifications of methods used above (grayscale conversion, thresholding, regional labeling). I will start from bounding boxes, extracts using properties = measure.regionprops(labels), I used this method because it was effective with the cereal and I was familiar with it using it to calculate stuff like area from properties which was helpful for merging based on overlapping pixels or removing if I think the object is too small. I merge objects nearby boxes to improving the accuracy of feature detection and reducing false positives. This is particularly useful when objects are close to each other but detected as separate regions.
-![Card Original](readme_images/bounding_boxes.png)
+**This is the object detection on card**
+![Card with Box](readme_images/bounding_boxes.png)
+
+
+
+**classify_card_by_center(cropped_card_image, bounding_boxes):**
+
+This method was the most interesting to code up. This method uses a combination of geometric, spatial, and color features to classify and segment card elements. By analyzing bounding boxes, measuring distances, and pairing related boxes, the algorithm is able to accurately extract key features like the card’s value and suit. Removing the Largest Bounding Box, This largest bounding box is the card itself so we no longer need this for identification of the card. Knowing the card itself is in the crop I find the center of the card. This center is found with image dimensions and then is used to measure relative distance of bounding boxes from this center (which I will explain why). We then use distance calculation between bounding boxes and card center to identify the boxes that are closest to center which is the middle of the card, then the furthest pair away from the center is the cards value and then next furthest is the cards suit as pictured below. There is a function to look for pairs, some problems I ran into was off the card detection furthest from middle so I made sure that when finding outer edges there is something equal distant and the opposite direction. I also implemented red or black detection on the middle object (since its uniformity center is the color). I then Return: The function returns a dictionary containing the bounding boxes for the value, suit, and middle features, the color detected, and the cropped image. This is the final output, useful for downstream tasks like classification or visualization.
+**Here is the card boxes:**
+![Card Middle](readme_images/middle.png)
+
+![Card Original](readme_images/values.png)
+
+![Card Original](readme_images/suit.png)
 
 
 ## Part 2: Data Collection and Preparation
