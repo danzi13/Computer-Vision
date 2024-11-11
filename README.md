@@ -6,13 +6,18 @@ NOTE: Git push origin main: did not let me push because of large files so this i
 **Methods**: 
 
 **1. Preprocessing and Justification**
-
-- The python script SSDtesting.py contains 3 preprocessing methods, that are imported when training and testing: 
--crop_card(image_path),
--classify_card_by_center(cropped_card_image, bounding_boxes), 
--bounding(cropped_card_image, contour),
+The python script SSDtesting.py contains 3 preprocessing methods, that are imported when training and testing:
+  
+- crop_card(image_path),
+  
+- classify_card_by_center(cropped_card_image, bounding_boxes),
+  
+- bounding(cropped_card_image, contour),
+  
 I will go into detail of each method, but what these 3 functions do is crop the card, bound boxes on the card (while removing noise and joining close bondings) and
--returns: {"Value": value_boxes,"Suit": suit_boxes,"Middle": middle_box, "Color": color, "Image (Crop)": cropped_card_image}
+
+- returns: {"Value": value_boxes,"Suit": suit_boxes,"Middle": middle_box, "Color": color, "Image (Crop)": cropped_card_image}
+  
 This is the original image:
 ![Card Original](readme_images/original_card.png)
 **Crop_Card(image_path):**
@@ -43,9 +48,11 @@ The current card processing model has limitations in its accuracy, typically ach
 
 
 **Running the code**
--Please run python testing_for_visuals.py to see the pre-processing breakdown and images.
--SSDtraining.py is the same code just without visuals so I can use training and test data on our cards.
--There is likely no need to run training.py but testing.py should work if you’d like to see the: Accuracy on test data: 31.8202, however around ⅓ each time
+ - Please run python testing_for_visuals.py to see the pre-processing breakdown and images.
+ - 
+ - SSDtraining.py is the same code just without visuals so I can use training and test data on our cards.
+ - 
+ - There is likely no need to run training.py but testing.py should work if you’d like to see the: Accuracy on test data: 31.8202, however around ⅓ each time
 
 
 ## Part 2: Data Collection and Preparation
