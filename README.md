@@ -2,28 +2,26 @@
 
 ### Part 3
 NOTE: Git push origin main: did not let me push because of large files so this is uploaded through github.com, please contact if all the files aren’t there to run the code
+
 **Methods**: 
+
 **1. Preprocessing and Justification**
+
 - The python script SSDtesting.py contains 3 preprocessing methods, that are imported when training and testing: 
-crop_card(image_path),
-classify_card_by_center(cropped_card_image, bounding_boxes), 
-bounding(cropped_card_image, contour),
-I will go into detail of each method, but what these 3 functions do is crop the card, bound boxes on the card (while removing noise and joining close bondings) and returns: {"Value": value_boxes,"Suit": suit_boxes,"Middle": middle_box, "Color": color, "Image (Crop)": cropped_card_image}
+-crop_card(image_path),
+-classify_card_by_center(cropped_card_image, bounding_boxes), 
+-bounding(cropped_card_image, contour),
+I will go into detail of each method, but what these 3 functions do is crop the card, bound boxes on the card (while removing noise and joining close bondings) and
+-returns: {"Value": value_boxes,"Suit": suit_boxes,"Middle": middle_box, "Color": color, "Image (Crop)": cropped_card_image}
 This is the original image:
 ![Card Original](readme_images/original_card.png)
-Crop_Card(image_path): 
-This function loads the image in grayscale which simplifies the edge detection on the table for our card. We then apply Gaussian blur to reduce noise ensuring edge detection isn’t influenced by small details. We then used Sobel for actual edge detection which was useful for identifying straight edges crucial for our horizontal and vertical gradients. After edge detection the image is thresholded to create a binary image (edges = white, non-edges = black). This step simplifies the edges, making it easier to detect contours and, ultimately, the card itself. We then findContours to identify the largest one (which will be the card), we use this largest contour to isolate the card itself from the image to crop and only focus on feature extraction from this card.
-JUSTIFICATION OF METHODS: 
--Gaussian Blur: Blurring is essential to smooth out noise, which could lead to false edges or small irrelevant contours. It ensures that the edge detection only highlights the meaningful boundaries. Tried to replicate what I learned from the cereal
--Sobel Operator: Sobel is a standard edge detection operator that computes intensity gradients, making it a suitable method for detecting the sharp, well-defined edges of a card. Sobel’s simple approach is ideal for detecting straight edges in relatively clean images.
--Thresholding: This is just the binary format we used in class so I continued from this baseline
--Contour Detection: Again is just the contour format we used in class so I continued from this baseline
--Bounding Box and Cropping: These are also basic methods learned from class just used cv_image show to display image, not even really sure if cropping can be more “efficient” 
-This is the cropped image:
+**Crop_Card(image_path):**
+This function loads the image in grayscale which simplifies the edge detection on the table for our card. We then apply Gaussian blur to reduce noise ensuring edge detection isn’t influenced by small details. We then used Sobel for actual edge detection which was useful for identifying straight edges crucial for our horizontal and vertical gradients. After edge detection the image is thresholded to create a binary image (edges = white, non-edges = black). This step simplifies the edges, making it easier to detect contours and, ultimately, the card itself. We then findContours to identify the largest one (which will be the card), we use this largest contour to isolate the card itself from the image to crop and only focus on feature extraction from this card.Blurring is essential to smooth out noise, which could lead to false edges or small irrelevant contours. It ensures that the edge detection only highlights the meaningful boundaries. Tried to replicate what I learned from the cereal Sobel Operator: Sobel was a standard edge detection operator that computes intensity gradients, making it a suitable method for detecting the sharp, well-defined edges of a card. Sobel’s simple approach is ideal for detecting straight edges in relatively clean images. Thresholding: This is just the binary format we used in class so I continued from this baseline Contour Detection: Again is just the contour format we used in class so I continued from this baseline Bounding Box and Cropping: These are also basic methods learned from class just used cv_image show to display image, not even really sure if cropping can be more “efficient” 
+**This is the cropped image:**
 ![Card Original](readme_images/cropped_card.png)
 
 
-Bounding(cropped_image, contour):
+**Bounding(cropped_image, contour):**
 This function is basically to clean up the card itself. We detect boxes, remove noise (of small irrelevant detections), merge boxes that are close together and display results. Parameters are a cropped_image and it returns a list of bounding boxes. We do the following steps to achieve this: grayscale conversion, image into grayscale -> convert image to binary based on intensity values, region labeling connection regions in the binary image, bounding box extraction with filtering of ones that are too small, then merge bounding boxes. The function isolates features by thresholding, labeling regions, and extracting bounding boxes. Nearby bounding boxes are merged to prevent misclassification of adjacent features. Not going to repeat with justifications of methods used above (grayscale conversion, thresholding, regional labeling). I will start from bounding boxes, extracts using properties = measure.regionprops(labels), I used this method because it was effective with the cereal and I was familiar with it using it to calculate stuff like area from properties which was helpful for merging based on overlapping pixels or removing if I think the object is too small. I merge objects nearby boxes to improving the accuracy of feature detection and reducing false positives. This is particularly useful when objects are close to each other but detected as separate regions.
 ![Card Original](readme_images/bounding_boxes.png)
 
