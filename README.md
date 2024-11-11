@@ -49,10 +49,25 @@ The current card processing model has limitations in its accuracy, typically ach
 
 **Running the code**
  - Please run python testing_for_visuals.py to see the pre-processing breakdown and images.
- - 
+   
  - SSDtraining.py is the same code just without visuals so I can use training and test data on our cards.
- - 
+   
  - There is likely no need to run training.py but testing.py should work if you’d like to see the: Accuracy on test data: 31.8202, however around ⅓ each time
+
+
+**Testing.py and Training.py**
+Uses this: 
+returns: {"Value": value_boxes,"Suit": suit_boxes,"Middle": middle_box, "Color": color, "Image (Crop)": cropped_card_image}
+
+
+  As of right now I am still in the beginning stages of these codes but I will touch on them a little bit. Both use the same image processing of the 3 functions mentioned in feature extraction. of playing cards by first cropping the card from the original image. It then classifies card features (like value and suit) and extracts bounding boxes around them. The images are transformed and stored along with their corresponding bounding boxes and labels for use in a machine learning model. The machine learning model used is a pre-trained SSD (Single Shot MultiBox Detector) with a MobileNet V3 backbone, which is efficient for real-time object detection. SSD was chosen because it provides a good balance between speed and accuracy, making it ideal for detecting multiple objects like card values and suits in real-time. (SSD was recommended by professor for learning). Testing.py is just the reverse of training, same methods except using model for prediction
+
+
+**Improvement Areas:** (These are mainly in feature extraction still but frameworks are here) 
+- Implement better color detection to refine suit classification (e.g., distinguishing red vs black suits).
+- Enhance the extraction of card values and suits for higher accuracy.
+- Consider rotating and straightening the card images for more accurate bounding box detection.
+- Added Joker and Backs of cards to the training, right now they are not identified by file names
 
 
 ## Part 2: Data Collection and Preparation
