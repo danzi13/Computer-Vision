@@ -38,6 +38,15 @@ This method was the most interesting to code up. This method uses a combination 
 
 ![Card Original](readme_images/suit.png)
 
+**Pre-Processing Limitations**
+The current card processing model has limitations in its accuracy, typically achieving around 66% accuracy in correctly identifying the value and suit of the cards. This is due to variability in card orientation and the complexity of distinguishing between closely placed symbols. While this approach works reasonably well, it doesn't always capture both the value and suit reliably. To improve the model's performance, the next update will focus on cropping the card image more precisely, rotating it to a straight alignment, and using a pixel prediction technique to fill in any gaps. This refinement is expected to enhance the accuracy of symbol detection and improve the overall card classification process. This limitation definitely affects my accuracy slightly because suit and values are getting mixed up, also sometimes it doesn’t always detect middle, suit and value all of them.
+
+
+**Running the code**
+-Please run python testing_for_visuals.py to see the pre-processing breakdown and images.
+-SSDtraining.py is the same code just without visuals so I can use training and test data on our cards.
+-There is likely no need to run training.py but testing.py should work if you’d like to see the: Accuracy on test data: 31.8202, however around ⅓ each time
+
 
 ## Part 2: Data Collection and Preparation
 
