@@ -71,13 +71,16 @@ for filename in file_list:
     # Crop the card image
     cropped_card_image, card_contour = crop_card(img_path)
 
+    #print(cropped_card_image)
+
+
     if cropped_card_image is not None:
         # Classify card features (Value, Suit, etc.)
         card_features = classify_card_by_center(cropped_card_image, bounding(cropped_card_image, card_contour))
         value_boxes = card_features.get("Value")
         suit_boxes = card_features.get("Suit")
         cropped_image = card_features.get("Image (Crop)")
-
+        
         # Extract Value and Suit from filename
         value, suit = extract_value_and_suit_from_filename(filename)
 
@@ -95,7 +98,7 @@ for filename in file_list:
                 if box is not None:
                     box_tensor = torch.as_tensor(box, dtype=torch.float32).unsqueeze(0)  # Add batch dimension
                     labels_tensor = torch.as_tensor([value_index], dtype=torch.int64)  # Only value label
-                    test_data.append((transform(cropped_image), {"boxes": box_tensor, "labels": labels_tensor}))
+                    test_data.append((transform(cropped_card_image), {"boxes": box_tensor, "labels": labels_tensor}))
 
         # Process Suit bounding boxes
         if suit_boxes:
@@ -128,4 +131,42 @@ with torch.no_grad():
             total_images += len(true_labels)
 
 accuracy = total_correct / total_images
-print(f"Accuracy on test data: {accuracy:.4f}")
+
+from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
+
+all_true_labels = []
+all_predicted_labels = []
+
+# Perform inference and collect predictions and ground truths
+with torch.no_grad():
+    for images_batch, targets_batch in test_loader:
+        images_batch = [image.to(device) for image in images_batch]
+        targets_batch = [{k: v.to(device) for k, v in t.items()} for t in targets_batch]
+
+        # Make predictions
+        outputs = model(images_batch)
+
+        for output, target in zip(outputs, targets_batch):
+            # Extract predicted and true labels
+            predicted_labels = output['labels'].cpu().numpy()
+            true_labels = target['labels'].cpu().numpy()
+
+            # Ensure consistent length by truncating to the shorter
+            min_length = min(len(predicted_labels), len(true_labels))
+            predicted_labels = predicted_labels[:min_length]
+            true_labels = true_labels[:min_length]
+
+            # Append to the lists
+            all_predicted_labels.extend(predicted_labels)
+            all_true_labels.extend(true_labels)
+
+# Calculate metrics
+precision = precision_score(all_true_labels, all_predicted_labels, average='weighted', zero_division=0)
+recall = recall_score(all_true_labels, all_predicted_labels, average='weighted', zero_division=0)
+f1 = f1_score(all_true_labels, all_predicted_labels, average='weighted', zero_division=0)
+
+# Print metrics
+print(f"Precision: {precision:.4f}")
+print(f"Recall: {recall:.4f}")
+print(f"F1-Score: {f1:.4f}")
+print(f"Accuracy: {accuracy:.4f}")
