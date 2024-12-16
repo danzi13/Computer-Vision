@@ -85,6 +85,8 @@ Additionally, ensure that all required files (e.g., dataset, ssd_card_model.pth)
 To visualize how a card is processed (cropping, bounding boxes, etc.), run:
 
 - python testing_for_visuals.py
+
+  
 This script demonstrates the full breakdown of card processing, including cropping, bounding boxes, and the identification of the middle, suit, and value. It is useful for debugging or understanding the preprocessing steps.
 Sample output is shown in part 3. (Each bounding box of the image will be produced)
 
@@ -92,6 +94,7 @@ Sample output is shown in part 3. (Each bounding box of the image will be produc
 
 For large-scale processing of multiple cards, use:
 - python SSDtesting.py
+
   
 This script applies the same preprocessing logic as testing_for_visuals.py but without visualizations. To enable visualizations, uncomment line 300. However, testing_for_visuals.py already shows everything needed for individual card processing.
 
@@ -99,13 +102,16 @@ This script applies the same preprocessing logic as testing_for_visuals.py but w
 To train the SSD model, generate bounding boxes, and create the ssd_card_model.pth file:
 - python training.py
 
+
 Trains the SSD model for 40 epochs.
 Processes the cards using SSDtesting.py to generate bounding boxes and identify card values/suits.
 Saves the trained model to ssd_card_model.pth.
 
 ## 4. Evaluating Model Performance ##
 To generate prediction statistics on the testing, validation, or training datasets, run:
-python testing.py
+- python testing.py
+
+  
 Adjust the dataset being evaluated by modifying line 31 (photos/test, photos/train, or photos/validation).
 Outputs metrics such as precision, recall, F1-score, and accuracy.
 Example output:
@@ -118,6 +124,7 @@ Accuracy: 46.61%
 ## 5. Real-Time Card Detection ##
 To test the program in real-time using a webcam feed, run:
 - python live_card.py
+
 
 Press spacebar to capture a snapshot from the live feed.
 The snapshot is processed through cropping and the model's prediction pipeline.
