@@ -339,9 +339,9 @@ def visualize_boxes(cropped_card_image, label, boxes):
         plt.show()
 
 # Example usage
-#cropped_card_image, card_contour = crop_card('photos/train/3S-02.png')
-cropped_card_image, card_contour = crop_card('photos/train/7C-04.png')
-#cropped_card_image, card_contour = crop_card('photos/test/AC-02.png')
+cropped_card_image, card_contour = crop_card('photos/test/2C-02.png')
+#cropped_card_image, card_contour = crop_card('photos/train/7C-04.png')
+#cropped_card_image, card_contour = crop_card('photos/test/JH-01.png')
 
 if cropped_card_image is not None:
     item = classify_card_by_center(cropped_card_image, bounding(cropped_card_image,card_contour))

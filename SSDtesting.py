@@ -35,11 +35,8 @@ def crop_card(image_path):
 
         # Step 7: Crop the card from the original image
         cropped_card = original_image[y:y+h, x:x+w]
-        plt.imshow(cv2.cvtColor(cropped_card, cv2.COLOR_BGR2RGB))
-        plt.title(f"{label} Boxes")
-        plt.axis('off')
-        plt.show()
-
+       
+        
         return cropped_card, largest_contour
 
     else:
@@ -74,6 +71,7 @@ def classify_card_by_center(cropped_card_image, bounding_boxes):
     # Calculate the center of the card
     card_center_x = cropped_card_image.shape[1] // 2
     card_center_y = cropped_card_image.shape[0] // 2
+    
 
     # Calculate distances from the center for each box
     def calculate_box_center(box):
@@ -148,8 +146,6 @@ def classify_card_by_center(cropped_card_image, bounding_boxes):
         pairs = list(set(tuple(sorted(pair)) for pair in pairs))
 
         return pairs
-
-
 
     adjacent_pairs = find_adjacent_pairs(remaining_boxes)
     sorted_pairs = sorted(
@@ -235,6 +231,7 @@ def classify_card_by_center(cropped_card_image, bounding_boxes):
     color = detect_red_or_black(cropped_card_image, middle_box)
     #print(color)
     # Return the classified boxes
+    #print(value_boxes, suit_boxes)
     return {
         "Value": value_boxes,
         "Suit": suit_boxes,
@@ -300,14 +297,42 @@ def bounding(cropped_card_image, contour):
         if not merged:
             merged_boxes.append((minc, minr, maxc, maxr))
 
-    
+    #visualize_boxes(cropped_card_image, "Box", merged_boxes)
 
     return merged_boxes
 
+def visualize_boxes(cropped_card_image, label, boxes):
+        """
+        Visualize bounding boxes on the card with labels.
+        """
+        display_image = cropped_card_image.copy()
+
+        if not boxes:
+            return
+
+        for i, box in enumerate(boxes):
+            if isinstance(box, tuple) and len(box) == 2:
+                # Draw a pair of boxes
+                for single_box in box:
+                    x_min, y_min, x_max, y_max = single_box
+                    cv2.rectangle(display_image, (x_min, y_min), (x_max, y_max), (255, 0, 0), 2)
+                    cv2.putText(display_image, label, (x_min, y_min - 10),
+                                cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
+            else:
+                # Draw a single box
+                x_min, y_min, x_max, y_max = box
+                cv2.rectangle(display_image, (x_min, y_min), (x_max, y_max), (255, 0, 0), 2)
+                cv2.putText(display_image, label, (x_min, y_min - 10),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
+
+        plt.figure(figsize=(10, 10))
+        plt.imshow(cv2.cvtColor(display_image, cv2.COLOR_BGR2RGB))
+        plt.title(f"{label} Boxes")
+        plt.axis('off')
+        plt.show()
 
 # Example usage
 cropped_card_image, card_contour = crop_card('photos/train/3S-02.png')
-#cropped_card_image, card_contour = crop_card('photos/train/7C-04.png')
 #cropped_card_image, card_contour = crop_card('photos/test/AC-02.png')
 
 if cropped_card_image is not None:

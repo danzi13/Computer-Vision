@@ -156,7 +156,7 @@ model.train()  # Set the model to training mode
 optimizer = optim.Adam(model.parameters(), lr=1e-5)
 
 # Training loop
-num_epochs = 10  # Adjust this based on your needs
+num_epochs = 40  
 
 for epoch in range(num_epochs):
     model.train()
