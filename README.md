@@ -145,6 +145,16 @@ Prediction skews towards lower value cards
 
 ## Sample Test Image
 
+Original Image: ![Card Original](readme_images/2C-intial.png)
+
+Crop With Bounding Boxes: ![Card Original](readme_images/2C-crop-bound.png)
+
+Middle value: ![Card Original](readme_images/2C-middle.png)
+
+Suit value: ![Card Original](readme_images/2C-suit.png)
+
+Card Value: ![Card Original](readme_images/2C-value.png)
+
 
 
 ## Part 4: Performance Metrics, Challenges, and Recommendations
