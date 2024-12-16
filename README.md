@@ -157,6 +157,8 @@ Card Value: ![Card Original](readme_images/2C-value.png)
 
 Prediction (recreated angles using live_card.py) : ![Card Original](readme_images/2C-pred.png)
 
+- Low confidence interval. Sometimes it would predict 3C.
+
 ## Part 4: Performance Metrics, Challenges, and Recommendations
 
 Justification of the Choice of Classifier
