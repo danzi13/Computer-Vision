@@ -111,7 +111,7 @@ Sameple output:
 Loaded 492 images.
 Epoch [1/40], Loss: 77.87779752219596
 
-(Until loss is finished)
+(Until epochs are finished)
 
 ## 4. Evaluating Model Performance ##
 To generate prediction statistics on the testing, validation, or training datasets, run:
