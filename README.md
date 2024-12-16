@@ -52,6 +52,11 @@ For example:
 
 This bounding box of the card still gets boxes outside of the card edge. Look at the blue box in the bottom right. Although this example will remove that because there's no equodistance opposite value (because there's a card top and bottom the code will work with other values before deciding), I'm sure some test images will misclassify these outer edges.
 
+Another example 
+![Card Original](readme_images/value_messup.png)
+
+This bouding box is close to finding the exact heart value execpt the code thinks that heart is the one that signifies the value. Getting that portion of the leaf because it's the wrong hear will hurt the data later on. 
+
 ## Proposed Improvements
 To address the observed challenges and reduce error rates, the following improvements are recommended:
 Enhanced Cropping and Bounding Box Detection:
