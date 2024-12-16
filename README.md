@@ -2,7 +2,7 @@
 
 ## Part 5: Final Update 
 
-How to run code (at bottom of this write-up)
+How to run code (at bottom of this part write-up)
 Slideshow: 
 
 ## Description of the Test Database
@@ -75,6 +75,57 @@ Iteratively test and refine the cropping, bounding box detection, and classifica
 
 ## Individual Contributions
 This project was completed independently. All stages, including dataset collection, model training, evaluation, and implementation of the live feed, were carried out by me. The solo nature of this effort ensured a comprehensive understanding of all aspects of the project, from data pre-processing to final evaluation and optimization.
+
+
+## Final Deliverables: Instructions for Running the Code ##
+Below are the instructions to run the various scripts included in this repository. The final solution has been designed to be runnable out of the box with minimal setup. Before running the code, please ensure that all necessary dependencies and imports are installed in your environment. These dependencies could not be uploaded to GitHub due to their size, so make sure to configure your environment accordingly with the proper imports.
+Additionally, ensure that all required files (e.g., dataset, ssd_card_model.pth) are placed in the correct locations as specified in the scripts exactly how this folder is already set up. 
+
+## 1. Preprocessing with Visualizations ## 
+To visualize how a card is processed (cropping, bounding boxes, etc.), run:
+
+- python testing_for_visuals.py
+This script demonstrates the full breakdown of card processing, including cropping, bounding boxes, and the identification of the middle, suit, and value. It is useful for debugging or understanding the preprocessing steps.
+Sample output is shown in part 3. (Each bounding box of the image will be produced)
+
+## 2. Preprocessing without Visualizations ##
+
+For large-scale processing of multiple cards, use:
+- python SSDtesting.py
+  
+This script applies the same preprocessing logic as testing_for_visuals.py but without visualizations. To enable visualizations, uncomment line 300. However, testing_for_visuals.py already shows everything needed for individual card processing.
+
+## 3. Training the Model ##
+To train the SSD model, generate bounding boxes, and create the ssd_card_model.pth file:
+- python training.py
+
+Trains the SSD model for 40 epochs.
+Processes the cards using SSDtesting.py to generate bounding boxes and identify card values/suits.
+Saves the trained model to ssd_card_model.pth.
+
+## 4. Evaluating Model Performance ##
+To generate prediction statistics on the testing, validation, or training datasets, run:
+python testing.py
+Adjust the dataset being evaluated by modifying line 31 (photos/test, photos/train, or photos/validation).
+Outputs metrics such as precision, recall, F1-score, and accuracy.
+Example output:
+Train Set Performance
+Precision: 22.57%
+Recall: 33.33%
+F1-Score: 25.56%
+Accuracy: 46.61%
+
+## 5. Real-Time Card Detection ##
+To test the program in real-time using a webcam feed, run:
+- python live_card.py
+
+Press spacebar to capture a snapshot from the live feed.
+The snapshot is processed through cropping and the model's prediction pipeline.
+Predictions are displayed on the screen, including the card value and suit, along with a confidence score.
+Notes:
+Requires the same color background for more accurate edge detection.
+Works best when cards are positioned neatly on a flat surface.
+Prediction skews towards lower value cards
 
 
 ## Part 4: Performance Metrics, Challenges, and Recommendations
