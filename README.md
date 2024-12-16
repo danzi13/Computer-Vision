@@ -50,7 +50,7 @@ During real-time testing, the live feed faced difficulties in identifying featur
 For example:
 ![Card Original](readme_images/bounding-mishap.png)
 
-This bounding box of the card still gets boxes outside of the card edge. Although this example will remove that because there's no equodistance opposite value (because there's a card top and bottom the code will work with other values before deciding), I'm sure some test images will misclassify these outer edges.
+This bounding box of the card still gets boxes outside of the card edge. Look at the blue box in the bottom right. Although this example will remove that because there's no equodistance opposite value (because there's a card top and bottom the code will work with other values before deciding), I'm sure some test images will misclassify these outer edges.
 
 ## Proposed Improvements
 To address the observed challenges and reduce error rates, the following improvements are recommended:
