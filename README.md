@@ -155,7 +155,7 @@ Suit value: ![Card Original](readme_images/2C-suit.png)
 
 Card Value: ![Card Original](readme_images/2C-value.png)
 
-
+Prediction (recreated angles using live_card.py) : ![Card Original](readme_images/2C-pred.png)
 
 ## Part 4: Performance Metrics, Challenges, and Recommendations
 
