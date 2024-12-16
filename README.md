@@ -46,6 +46,12 @@ Blurry or Poor-Quality Images:
 Some test images were blurry, making it challenging for the model to accurately detect and classify the card's features. Blurry edges or faint markings further reduced the confidence of predictions.
 Snapshot Identification Limitations:
 During real-time testing, the live feed faced difficulties in identifying features in the middle of the card or distinguishing the suit from the value. These issues were amplified by slight variations in lighting and positioning.
+
+For example:
+![Card Original](readme_images/bounding_mishap.png)
+
+This bounding box of the card still gets boxes outside of the card edge. Although this example will remove that because there's no equodistance opposite value (because there's a card top and bottom the code will work with other values before deciding), I'm sure some test images will misclassify these outer edges.
+
 ## Proposed Improvements
 To address the observed challenges and reduce error rates, the following improvements are recommended:
 Enhanced Cropping and Bounding Box Detection:
