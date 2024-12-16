@@ -143,6 +143,9 @@ Requires the same color background for more accurate edge detection.
 Works best when cards are positioned neatly on a flat surface.
 Prediction skews towards lower value cards
 
+## Sample Test Image
+
+
 
 ## Part 4: Performance Metrics, Challenges, and Recommendations
 
