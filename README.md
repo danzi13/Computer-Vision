@@ -3,7 +3,8 @@
 ## Part 5: Final Update 
 
 How to run code (at bottom of this part write-up)
-Slideshow: 
+Slideshow: [https://docs.google.com/presentation/d/1Ku1Y4pHpqf_nqaaH8u0-EfxcCPXUWM5D8AGYuw7_ifw/edit#slide=id.p  
+](https://docs.google.com/presentation/d/1Ku1Y4pHpqf_nqaaH8u0-EfxcCPXUWM5D8AGYuw7_ifw/edit?usp=sharing)
 
 ## Description of the Test Database
 The test database was collected during the validation and training phases. It consists of images that were randomly assigned to different folders, ensuring that the test images were not used for training or validation. While the database shares some similarities with the training and validation subsets, such as a consistent background (a table), it introduces variability through random positioning of the cards and occasional blurry images. This setup simulates how the program is expected to operate in real-world scenarios, where cards are placed on a table with slight variations in position, angle and clarity.
