@@ -1,5 +1,68 @@
 # Computer-Vision
 
+## Part 5: Final Update 
+
+## Description of the Test Database
+The test database was collected during the validation and training phases. It consists of images that were randomly assigned to different folders, ensuring that the test images were not used for training or validation. While the database shares some similarities with the training and validation subsets, such as a consistent background (a table), it introduces variability through random positioning of the cards and occasional blurry images. This setup simulates how the program is expected to operate in real-world scenarios, where cards are placed on a table with slight variations in position, angle and clarity.
+The decision to use this setup is rooted in practicality: the program is designed specifically to identify cards on a table, not in complex environments or with additional backgrounds. Therefore, adding unnecessary complexity, such as cards in outdoor scenes or highly cluttered backgrounds, would not align with the intended use case and could detract from the testing process. The test set is sufficient because it mimics real-world use cases of card identification on a table.
+Classification Accuracy on different test sets
+### **Train Set Performance**
+ - **Precision:** 22.57% 
+- **Recall:** 33.33% 
+- **F1-Score:** 25.56% 
+- **Accuracy:** 46.61% 
+--- ### **Validation Set Performance**
+ - **Precision:** 9.99% 
+- **Recall:** 17.65%
+ - **F1-Score:** 11.72% 
+- **Accuracy:** 45.24% 
+--- ### **Test Set Performance** 
+- **Precision:** 15.44% 
+- **Recall:** 25.84%
+ - **F1-Score:** 16.58%
+ - **Accuracy:** 44.53%
+
+## Analysis of Results 
+### Train vs. Validation Performance 
+- The training set shows higher precision, recall, and F1-score compared to the validation set, indicating some degree of overfitting.
+ - The precision drop in the validation set highlights the model's struggle to generalize beyond the training data.
+ ### Validation vs. Test Performance
+ - The test set results show slight improvement over the validation set, suggesting that the model benefits from being tested on unseen data with similar characteristics. 
+### Overall Model Performance 
+- The model's accuracy on the test set is 44.53%, which is consistent with the validation set's accuracy (45.24%). -
+- Low recall across all subsets indicates the model's challenge in detecting a significant portion of positive samples. 
+- Improving precision and recall and overall sample size could lead to better overall performance.
+Performance on the Test Set
+As expected, the performance on the test set was worse than that observed on the training and validation sets. Several factors contributed to the lower accuracy:
+
+## Misidentification During Cropping:
+
+In some cases, the card was incorrectly cropped, leaving portions of the card out of the frame. This led to the model detecting objects that were not part of the card itself, such as areas between the card's edge and the cropped image's boundary.
+This issue highlights the need for a more robust cropping mechanism to ensure the entire card is captured within the frame.
+Challenges with Identifying the Center and Bounding Boxes:
+Misidentification of the card's center led to errors in classifying values and suits. For instance, the suit, which is closer to the card's center, was sometimes confused with the value due to errors in calculating the Euclidean distance from the center.
+Bounding boxes occasionally extended outside the card’s edges, resulting in inaccurate classifications.
+Blurry or Poor-Quality Images:
+Some test images were blurry, making it challenging for the model to accurately detect and classify the card's features. Blurry edges or faint markings further reduced the confidence of predictions.
+Snapshot Identification Limitations:
+During real-time testing, the live feed faced difficulties in identifying features in the middle of the card or distinguishing the suit from the value. These issues were amplified by slight variations in lighting and positioning.
+## Proposed Improvements
+To address the observed challenges and reduce error rates, the following improvements are recommended:
+Enhanced Cropping and Bounding Box Detection:
+Implement stricter criteria to ensure all bounding boxes are confined to the card itself. This could involve additional pre-processing steps to filter out noise or regions outside the card's borders.
+Refinement of Suit and Value Classification:
+Introduce additional validation checks to distinguish between suits and values more effectively. For instance, combining distance-based classification with proximity to known regions of interest (e.g., the edges for values and the center for suits) could improve accuracy.
+Improved Handling of Blurry Images:
+Augment the training dataset with synthetically blurred images to make the model more robust to poor-quality inputs. Alternatively, pre-processing techniques like deblurring or edge enhancement could be applied to the test images.
+Live Feed Optimization:
+Allow for more flexibility in snapshot timing to ensure clear and stable frames. Adding functionality to confirm a selected region before processing could also reduce errors during real-time testing.
+Iterative Testing and Fine-Tuning:
+Iteratively test and refine the cropping, bounding box detection, and classification logic. Incorporating additional feedback loops to validate bounding boxes before classification would help reduce false positives.
+
+## Individual Contributions
+This project was completed independently. All stages, including dataset collection, model training, evaluation, and implementation of the live feed, were carried out by me. The solo nature of this effort ensured a comprehensive understanding of all aspects of the project, from data pre-processing to final evaluation and optimization.
+
+
 ## Part 4: Performance Metrics, Challenges, and Recommendations
 
 Justification of the Choice of Classifier
