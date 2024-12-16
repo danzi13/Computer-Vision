@@ -121,11 +121,14 @@ To generate prediction statistics on the testing, validation, or training datase
 Adjust the dataset being evaluated by modifying line 31 (photos/test, photos/train, or photos/validation).
 Outputs metrics such as precision, recall, F1-score, and accuracy.
 Example output:
-Train Set Performance
-Precision: 22.57%
-Recall: 33.33%
-F1-Score: 25.56%
-Accuracy: 46.61%
+
+Precision: 0.1544 
+
+Recall: 0.2584
+
+F1-Score: 0.1658
+
+Accuracy: 44.5281
 
 ## 5. Real-Time Card Detection ##
 To test the program in real-time using a webcam feed, run:
