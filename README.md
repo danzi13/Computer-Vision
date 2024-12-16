@@ -106,6 +106,12 @@ To train the SSD model, generate bounding boxes, and create the ssd_card_model.p
 Trains the SSD model for 40 epochs.
 Processes the cards using SSDtesting.py to generate bounding boxes and identify card values/suits.
 Saves the trained model to ssd_card_model.pth.
+Sameple output: 
+
+Loaded 492 images.
+Epoch [1/40], Loss: 77.87779752219596
+
+(Until loss is finished)
 
 ## 4. Evaluating Model Performance ##
 To generate prediction statistics on the testing, validation, or training datasets, run:
