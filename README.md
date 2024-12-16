@@ -2,7 +2,8 @@
 
 ## Part 5: Final Update 
 
-How to run code (at bottom of this part write-up)
+How to run code (at bottom of this part write-up, also will be at Tues OH to display code)
+
 Slideshow: [https://docs.google.com/presentation/d/1Ku1Y4pHpqf_nqaaH8u0-EfxcCPXUWM5D8AGYuw7_ifw/edit#slide=id.p  
 ](https://docs.google.com/presentation/d/1Ku1Y4pHpqf_nqaaH8u0-EfxcCPXUWM5D8AGYuw7_ifw/edit?usp=sharing)
 
