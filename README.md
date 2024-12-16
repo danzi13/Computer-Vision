@@ -2,6 +2,9 @@
 
 ## Part 5: Final Update 
 
+How to run code (at bottom of this write-up)
+Slideshow: 
+
 ## Description of the Test Database
 The test database was collected during the validation and training phases. It consists of images that were randomly assigned to different folders, ensuring that the test images were not used for training or validation. While the database shares some similarities with the training and validation subsets, such as a consistent background (a table), it introduces variability through random positioning of the cards and occasional blurry images. This setup simulates how the program is expected to operate in real-world scenarios, where cards are placed on a table with slight variations in position, angle and clarity.
 The decision to use this setup is rooted in practicality: the program is designed specifically to identify cards on a table, not in complex environments or with additional backgrounds. Therefore, adding unnecessary complexity, such as cards in outdoor scenes or highly cluttered backgrounds, would not align with the intended use case and could detract from the testing process. The test set is sufficient because it mimics real-world use cases of card identification on a table.
