@@ -1,4 +1,4 @@
-# Computer-Vision - Completed :)
+# Computer-Vision - Completed 
 
 ## Part 5: Final Update 
 
